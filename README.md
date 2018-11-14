@@ -33,11 +33,6 @@ docker save influxdb > influxdb-alpine.tar
 docker save vmware/powerclicore > powerclicore.tar
 
 
-cd /Users/sp27446/Docker
-scp  influxdb-alpine.tar  powerclicore.tar  ibmadmin@10.71.2.98:/home/Shared/SW
-ibmadmin  /  Tesalo:310
-
-
 [root@icp01-master-1 SW]# docker login mycluster.icp:8500
 Username (admin): admin
 Password:
