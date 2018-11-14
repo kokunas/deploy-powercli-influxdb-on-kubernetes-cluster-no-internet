@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: powerclicore-influxdb
+  name: vmware-influxdb
   namespace: vmware
   labels:
-    app: powerclicore
+    app: vmware
 spec:
   ports:
     # HTTP port
@@ -19,17 +19,17 @@ spec:
       nodePort: 38086
       protocol: TCP
   selector:
-    app: powerclicore
+    app: vmware
     tier: influxdb
   type: NodePort
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: powerclicore-influxdb-pvc
+  name: vmware-influxdb-pvc
   namespace: vmware
   labels:
-    app: powerclicore
+    app: vmware
 spec:
   accessModes:
     - ReadWriteOnce
@@ -40,17 +40,17 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: powerclicore-influxdb
+  name: vmware-influxdb
   namespace: vmware
   labels:
-    app: powerclicore
+    app: vmware
 spec:
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: powerclicore
+        app: vmware
         tier: influxdb
     spec:
       containers:
@@ -62,11 +62,11 @@ spec:
             - name: INFLUXDB_ADMIN_PASSWORD
               value: admin
             - name: INFLUXDB_DB
-              value: powerclicore
+              value: vmware
             - name: INFLUXDB_USER
-              value: powerclicore
+              value: vmware
             - name: INFLUXDB_USER_PASSWORD
-              value: powerclicore
+              value: vmware
           ports:
             - containerPort: 8083
               name: influxdb-http
@@ -78,4 +78,4 @@ spec:
       volumes:
         - name: influxdb
           persistentVolumeClaim:
-            claimName: powerclicore-influxdb-pvc
+            claimName: vmware-influxdb-pvc
