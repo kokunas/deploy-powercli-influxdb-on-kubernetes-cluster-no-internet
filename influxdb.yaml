@@ -8,10 +8,12 @@ metadata:
     app: powerclicore
 spec:
   ports:
+    # HTTP port
     - port: 38083
       targetPort: 8083
       nodePort: 38083
       protocol: TCP
+    # REST API port
     - port: 38086
       targetPort: 8086
       nodePort: 38086
