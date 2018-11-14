@@ -8,15 +8,15 @@ metadata:
     app: vmware
 spec:
   ports:
-    # HTTP port
-    - port: 38083
+    - name: influxdb-http
+      port: 30083
       targetPort: 8083
-      nodePort: 38083
+      nodePort: 30083
       protocol: TCP
-    # REST API port
-    - port: 38086
+    - name: influxdb-rest
+      port: 30086
       targetPort: 8086
-      nodePort: 38086
+      nodePort: 30086
       protocol: TCP
   selector:
     app: vmware
@@ -35,7 +35,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 10Gi
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
