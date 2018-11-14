@@ -186,9 +186,8 @@ Verification:
 
 Access into NFS server and check new files were created under:
 ```
-    - /export/gitlab/gitlab-postgres-pv
-    - /export/gitlab/gitlab-redis-pv
-    - /export/gitlab/gitlab-pv
+    - /export/vmware/vmware-influxdb-pv
+    - /export/vmware/vmware-powerclicore-pv
 ```
 
 
