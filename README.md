@@ -55,7 +55,7 @@ Verify .tar files:
       -rw-r--r-- 1 root root  85387776 Nov 14 06:54 influxdb-alpine.tar
 ```
 
-Then copy these 3 .tar files into "Master" server (ie: under /tmp)
+Then copy these 2 .tar files into "Master" server (ie: under /tmp)
 ```
   $ ssh root@icp01-master-1
   $ ls -lrt /tmp
@@ -108,7 +108,9 @@ Tag docker image version (optional, but recommended):
 
 Verify tags (filtering by "vmware" namespace):
 ```
-    1ddsc9b
+    $ docker images | grep vmware
+      mycluster.icp:8500/vmware/influxdb     1.5.4-alpine    e54e3cd3dd62    2 weeks ago      82MB
+      mycluster.icp:8500/vmware/powerclicore   ubuntu16.04.0   7caca1fba730    4 weeks ago   646MB
 ```
 
 Push docker images to local registry:
@@ -116,5 +118,31 @@ Push docker images to local registry:
     $ docker push mycluster.icp:8500/vmware/influxdb:1.5.4-alpine
     $ docker push mycluster.icp:8500/vmware/powerclicore:ubuntu16.04.0
 ```
+
+Verification:
+If using ICP, at this step, we should see under ICP console these 2 new images:
+
+  Login into ICP Console https://10.71.9.10:8443
+  admin / admin
+
+	   Container Images:
+		   - vmware/influxdb
+		   - vmware/powerclicore
+
+	   Namespaces:
+    	 - vmware
+
+
+
+## 5. Create directories on NFS server to store permanent data
+       ```
+         $ ssh root@icp01-nfs-1
+         $ mkdir /export/vmware
+         $ mkdir /export/vmware/vmware-influxdb-pv
+         $ mkdir /export/vmware/vmware-powerclicore-pv
+       ```
+
+
+
 
 ## 6. Create and Claim persistent volumes on NFS server, then create Services and Deploy images
