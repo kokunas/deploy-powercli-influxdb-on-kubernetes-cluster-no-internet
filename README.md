@@ -144,5 +144,52 @@ If using ICP, at this step, we should see under ICP console these 2 new images:
 
 
 
-
 ## 6. Create and Claim persistent volumes on NFS server, then create Services and Deploy images
+**IMPORTANT:**
+Yes, this can be done through a Helm template, or even merging actions like persistent's volumes creation.
+I just run "yaml's" one by one for learning purposes.
+
+Before anything, copy and extract "yamls.tar" file into "Master" server.
+```
+  $ cp "yamls.tar" root@10.71.9.10:/tmp ("Master" server)
+
+  $ ssh root@icp01-master-1
+  $ cd /tmp
+  $ tar -xvf yamls.tar
+  $ cd /tmp/yamls
+```
+
+  <!--- Create "vmware-influxdb-pv" persistent volume (on NFS server) -->
+```
+  $ kubectl create -f influxdb-pv.yaml
+```
+
+  <!--- Claim persistent volume, create service and deploy "vmware-influxdb" image -->
+```
+  $ kubectl create -f influxdb.yaml
+```
+
+  <!--- Create "vmware-powerclicore-pv" persistent volume (on NFS server) -->
+```
+  $ kubectl create -f powerclicore-pv.yaml
+```
+
+  <!--- Claim persistent volume, create service and deploy "vmware-powerclicore" image -->
+```
+  $ kubectl create -f powerclicore.yaml
+```
+
+Verification:
+```
+  $ kubectl get nodes
+```
+
+Access into NFS server and check new files were created under:
+```
+    - /export/gitlab/gitlab-postgres-pv
+    - /export/gitlab/gitlab-redis-pv
+    - /export/gitlab/gitlab-pv
+```
+
+
+## 7. Run powercli scripts.
