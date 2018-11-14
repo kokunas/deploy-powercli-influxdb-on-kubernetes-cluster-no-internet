@@ -12,7 +12,6 @@
 7. Run PowerCli scripts.
 
 
-
 ## 1. Download into your laptop official docker images from internet
 To do that, docker must be installed first (https://docs.docker.com/install/).
 
