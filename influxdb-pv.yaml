@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: powerclicore-influxdb-pv
+  namespace: vmware
+  labels:
+    type: nfs
+spec:
+  capacity:
+    storage:10Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: 10.71.9.51
+    path: /vmware/powerclicore-influxdb-pv
+  persistentVolumeReclaimPolicy: Recycle
