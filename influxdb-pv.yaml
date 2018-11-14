@@ -8,7 +8,7 @@ metadata:
     type: nfs
 spec:
   capacity:
-    storage:10Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   nfs:
