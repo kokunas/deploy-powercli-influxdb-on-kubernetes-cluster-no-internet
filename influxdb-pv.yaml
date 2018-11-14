@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: powerclicore-influxdb-pv
+  name: vmware-influxdb-pv
   namespace: vmware
   labels:
     type: nfs
@@ -13,5 +13,5 @@ spec:
     - ReadWriteOnce
   nfs:
     server: 10.71.9.51
-    path: /vmware/powerclicore-influxdb-pv
+    path: /vmware/vmware-influxdb-pv
   persistentVolumeReclaimPolicy: Recycle
