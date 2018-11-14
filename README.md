@@ -65,17 +65,17 @@ Loaded image: vmware/powerclicore:latest
 Loaded image: influxdb:1.5.4-alpine
 
 
-[root@icp01-master-1 SW]# **docker images | grep influx**
+[root@icp01-master-1 SW]# docker images | grep influx
 	influxdb                                              1.5.4-alpine            e54e3cd3dd62        2 weeks ago         82MB
 [root@icp01-master-1 SW]# docker images | grep powercli
 	vmware/powerclicore                        latest                      7caca1fba730        4 weeks ago         646MB
 
 
-[root@icp01-master-1 SW]# **docker tag influxdb:1.5.4-alpine** mycluster.icp:8500/vmware/influxdb:1.5.4-alpine
+[root@icp01-master-1 SW]# docker tag influxdb:1.5.4-alpine mycluster.icp:8500/vmware/influxdb:1.5.4-alpine
 [root@icp01-master-1 SW]# docker tag vmware/powerclicore:latest mycluster.icp:8500/vmware/powerclicore:ubuntu16.04.0
 
 
-[root@icp01-master-1 vmware-yamls]# **docker push** mycluster.icp:8500/vmware/influxdb:1.5.4-alpine
+[root@icp01-master-1 vmware-yamls]# docker push mycluster.icp:8500/vmware/influxdb:1.5.4-alpine
 The push refers to repository [mycluster.icp:8500/vmware/influxdb]
 187fe7e51b96: Pushed
 183eaa574760: Pushed
