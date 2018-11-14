@@ -8,11 +8,6 @@ metadata:
     app: vmware
 spec:
   ports:
-    - name: influxdb-http
-      port: 30083
-      targetPort: 8083
-      nodePort: 30083
-      protocol: TCP
     - name: influxdb-rest
       port: 30086
       targetPort: 8086
@@ -68,10 +63,8 @@ spec:
             - name: INFLUXDB_USER_PASSWORD
               value: vmware
           ports:
-            - containerPort: 8083
-              name: influxdb-http
             - containerPort: 8086
-              name: influxdb-api
+              name: influxdb-rest
           volumeMounts:
             - name: influxdb
               mountPath: /var/lib/influxdb/data
