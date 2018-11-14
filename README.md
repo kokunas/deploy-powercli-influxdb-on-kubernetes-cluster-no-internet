@@ -12,6 +12,7 @@
 7. Run PowerCli scripts.
 
 
+
 ## 1. Download into your laptop official docker images from internet
 To do that, docker must be installed first (https://docs.docker.com/install/).
 
@@ -21,24 +22,59 @@ Pull docker images:
     $ docker pull vmware/powerclicore
 ```
 
-POWERCLI
+Verify docker images:
+```
+$ docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+influxdb              1.5.4-alpine        e54e3cd3dd62        2 weeks ago         82MB
+vmware/powerclicore   latest              7caca1fba730        4 weeks ago         646MB
+```
+
+**IMPORTANT**:
+Image's versions change oftently. To check latest available, go to their official web sites:
+
+- powerclicore image
 https://hub.docker.com/r/vmware/powerclicore/
 
-INFLUXDB
+- influxdb image (use alpine image edition, which is much lighter than influxdb default one)
 https://hub.docker.com/_/influxdb/
 
 
+
+## 2. Export docker images into tar files, and copy them into Master server
+Export docker images to make them portable:
 ```
     $ docker save influxdb > influxdb-alpine.tar
     $ docker save vmware/powerclicore > powerclicore.tar
 ```
 
+Verify .tar files:
+```
+    $ ls -lh /Users/coco/Docker
+      -rw-r--r-- 1 root root 648655872 Nov 14 06:54 powerclicore.tar
+      -rw-r--r-- 1 root root  85387776 Nov 14 06:54 influxdb-alpine.tar
+```
+
+Then copy these 3 .tar files into "Master" server (ie: under /tmp)
+```
+  $ ssh root@icp01-master-1
+  $ ls -lrt /tmp
+    -rw-r--r-- 1 root root 648655872 Nov 14 06:54 powerclicore.tar
+    -rw-r--r-- 1 root root  85387776 Nov 14 06:54 influxdb-alpine.tar
+```
+
+
+## 3. Create namespace "vmware"
+Login into "Master" server:
 ```
     $ docker login mycluster.icp:8500
       Username (admin): admin
       Password:
       Login Succeeded
+```
 
+Create namespace "vmware"
+```
     $ kubectl create -f vmware-namespace.json
       namespace/vmware created
 
